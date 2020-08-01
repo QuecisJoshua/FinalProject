@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://d3js.org/d3.v4.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/custom.js') }}"></script>
+    {% block head %}{% endblock %}
+
 </head>
 
 <body>
@@ -28,6 +30,7 @@
                 <a class="navbar-brand" href="/">COVID-19 STATISTICS</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="/heatmap">Heatmap</a></li>
                 <li><a href="/custom">Custom Dasboard</a></li>
                 <li><a href="/search">Raw datatable Search</a></li>
                 <li><a href="/faq">FAQs</a></li>

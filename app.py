@@ -192,9 +192,9 @@ def countySearch():
     res = make_response(jsonify(jsonFile), 200)
     return res
 
-@app.route("/state")
+@app.route("/heatmap")
 def state():
-    return render_template("state.html")
+    return render_template("heatmap.html")
 
 @app.route("/faq")
 def faq():
