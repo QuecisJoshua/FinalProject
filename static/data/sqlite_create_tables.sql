@@ -5,5 +5,4 @@ CREATE TABLE usdata (
     usstate TEXT,
     confirmed INTEGER,
     deaths INTEGER,
-    recovered INTEGER,
     active INTEGER);

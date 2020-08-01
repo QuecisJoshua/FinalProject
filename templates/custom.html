@@ -4,14 +4,14 @@
 
 {% block pageheader%}
 <h1>COVID-19 Custom Dashboard</h1>
-<p>3/22/2020 - 6/22/2020</p>
+<p>3/22/2020 - 7/31/2020</p>
 {% endblock %}
 
 {% block main %}
 
 <div class="container">
     <div class="row margin-top-50">
-        <div class="col-md-2">
+        <div class="col-sm-3">
             <aside class="filters">
                 <div class="panel panel-default">
                     <div class="panel-heading">Search Criteria</div>
@@ -21,11 +21,11 @@
                                 <ul class="list-group" id="filters">
                                     <li class="filter list-group-item">
                                         <label for="date">Enter From Date</label>
-                                        <input class="form-control" id="txtfromdate" name="fromdate" type="text"
-                                            placeholder="2020-03-22" value="{{fromdate}}">
+                                        <input class="form-control" id="txtfromdate" name="fromdate" type="date"
+                                            placeholder="03/22/2020" value="{{fromdate}}">
                                         <label for="date">Enter To Date</label>
-                                        <input class="form-control" id="txttodate" name="todate" type="text"
-                                            placeholder="2020-03-24" value="{{todate}}">
+                                        <input class="form-control" id="txttodate" name="todate" type="date"
+                                            placeholder="07/31/2020" value="{{todate}}">
                                         <label for="county">Enter a County</label>
                                         <input class="form-control" id="txtcounty" name="county" type="text"
                                             placeholder="Maricopa" value="{{county}}">
@@ -42,9 +42,10 @@
                 </div>
             </aside>
         </div>
-        <div class="col-md-8">
+        <div class="col-sm-6">
             <div id="bar_confirmed_active"></div>
-            <br>
+        </div>
+        <div class="col-sm-3">
             <div id="bar_deaths"></div>
         </div>
     </div>

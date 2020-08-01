@@ -43,9 +43,9 @@ def setup_SQLitedb():
             reader = csv.reader(covid_data, delimiter=',')
             next (reader)
             for row in reader:
-                sqlite_insert_query = "INSERT INTO usdata (datadate, uscounty, usstate, confirmed, deaths, recovered, active) VALUES ('" + row[0] + "','" + row[1] + "','" + row[2] + "'," + row[3] + "," + row[4] + "," + row[5] + "," + row[6] + ")"
+                sqlite_insert_query = "INSERT INTO usdata (datadate, uscounty, usstate, confirmed, deaths, active) VALUES ('" + row[0] + "','" + row[1] + "','" + row[2] + "'," + row[3] + "," + row[4] + "," + row[5] + ")"
                 cursor.execute(sqlite_insert_query)
-        print("Import Completed")
+        print("Data import completed")
         sqliteConnection.commit()
         cursor.close()
 
@@ -62,40 +62,41 @@ def queryBuilder(startdate, enddate, uscounty, usstate):
     nocounty = False
 
     #starter 
-    sqlite_select_query = "SELECT datadate, uscounty, usstate, confirmed, deaths, recovered, active from usdata "
+    sqlite_select_query = "SELECT datadate, uscounty, usstate, confirmed, deaths, active from usdata "
     
     #if all parameter values are not empty then create custom query
     if startdate != "" or enddate != "" or uscounty != "" or usstate !="":
-        sqlite_select_query+= " where "
+        sqlite_select_query+= "where "
         
         #check for start and end date.  If only one provided, calculate accordingly
         if startdate != "" and enddate != "":
-            sqlite_select_query += "datadate >= '" + startdate + "' and datadate <= '" + enddate + "'"
+            sqlite_select_query += "datadate >= '" + startdate + "' and datadate <= '" + enddate + "' "
         elif startdate != "":
-            sqlite_select_query += "datadate >= '" + startdate + "'"
+            sqlite_select_query += "datadate >= '" + startdate + "' "
         elif enddate != "":
-            sqlite_select_query += "datadate <= '" + enddate + "'"
+            sqlite_select_query += "datadate <= '" + enddate + "' "
         else:
             nodate = True
 
         #check for county information, handling if date is not provided as a parameter
         if uscounty != "" and nodate == False:
-            sqlite_select_query += " and uscounty ='" + uscounty + "'"
+            sqlite_select_query += "and uscounty = '" + uscounty + "' "
         elif uscounty != "" and nodate == True:
-            sqlite_select_query += "uscounty ='" + uscounty + "'"
+            sqlite_select_query += "uscounty = '" + uscounty + "' "
         else:
             nocounty = True
 
         #check for country information, handling if date or county data is unavailable
         if usstate != "":
             if nodate == False or nocounty == False:
-                sqlite_select_query += " and usstate ='" + usstate + "'"
+                sqlite_select_query += "and usstate ='" + usstate + "' "
             else:
-                sqlite_select_query += "usstate ='" + usstate + "'"
+                sqlite_select_query += "usstate ='" + usstate + "' "
 
     #order data by date, then state, then county  
-    sqlite_select_query+= " order by datadate, usstate, uscounty"
+    sqlite_select_query+= "order by datadate, usstate, uscounty"
     return sqlite_select_query
+
 
 #################################################
 # JSON Builder
